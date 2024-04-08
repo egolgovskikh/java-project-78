@@ -1,17 +1,11 @@
 package hexlet.code.schemas;
 
-import lombok.EqualsAndHashCode;
+import java.util.Objects;
 
-@EqualsAndHashCode
-public class StringSchema {
-    private boolean required = false;
+public class StringSchema extends BaseSchema<StringSchema> {
+
     private int minLength = 0;
     private String contains = "";
-
-    public StringSchema required() {
-        required = true;
-        return this;
-    }
 
     public StringSchema minLength(int length) {
         minLength = length;
@@ -51,5 +45,18 @@ public class StringSchema {
             return s.contains(contains);
         }
         return true;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        StringSchema that = (StringSchema) object;
+        return required == that.required && minLength == that.minLength && Objects.equals(contains, that.contains);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(required, minLength, contains);
     }
 }

@@ -114,13 +114,17 @@ class StringSchemaTest {
         assertNotEquals(stringSchema, object);
     }
 
-    private <T, V> void changeField(T object, String filedName, V newValue) {
+    public static <T, V> void changeField(T object, String filedName, V newValue) {
         Field field;
         try {
-            field = object.getClass().getDeclaredField(filedName);
+            try {
+                field = object.getClass().getDeclaredField(filedName);
+            } catch (NoSuchFieldException e) {
+                field = object.getClass().getSuperclass().getDeclaredField(filedName);
+            }
             field.setAccessible(true);
             field.set(object, newValue);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+        } catch (IllegalAccessException | NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
     }
