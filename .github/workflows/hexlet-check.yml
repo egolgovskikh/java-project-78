@@ -22,3 +22,9 @@ jobs:
         uses: hexlet/project-action@release
         with:
           hexlet-id: ${{ secrets.HEXLET_ID }}
+
+      - name: Gradle Build Action
+        uses: gradle/gradle-build-action@v3.1.0
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.2.1
