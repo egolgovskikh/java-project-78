@@ -28,3 +28,7 @@ jobs:
 
       - name: Setup Java JDK
         uses: actions/setup-java@v4.2.1
+        with:
+          distribution: 'corretto'
+          java-version: '20.0.2.1'
+      - run: java app/src/main/java/hexlet/code/Main.java
