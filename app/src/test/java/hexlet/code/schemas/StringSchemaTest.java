@@ -5,7 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 
 class StringSchemaTest {
 
@@ -128,5 +132,4 @@ class StringSchemaTest {
             throw new RuntimeException(e);
         }
     }
-
 }

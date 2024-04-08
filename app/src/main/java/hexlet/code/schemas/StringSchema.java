@@ -49,8 +49,12 @@ public class StringSchema extends BaseSchema<StringSchema> {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
         StringSchema that = (StringSchema) object;
         return required == that.required && minLength == that.minLength && Objects.equals(contains, that.contains);
     }

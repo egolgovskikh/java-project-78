@@ -17,9 +17,9 @@ public class NumberSchema extends BaseSchema<NumberSchema> {
         return this;
     }
 
-    public NumberSchema range(int min, int max) {
-        this.min = min;
-        this.max = max;
+    public NumberSchema range(int minimum, int maximum) {
+        this.min = minimum;
+        this.max = maximum;
         return this;
     }
 
@@ -49,8 +49,12 @@ public class NumberSchema extends BaseSchema<NumberSchema> {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
         NumberSchema that = (NumberSchema) object;
         return required == that.required && positive == that.positive && min == that.min && max == that.max;
     }
