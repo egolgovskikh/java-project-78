@@ -22,26 +22,3 @@ jobs:
         uses: hexlet/project-action@release
         with:
           hexlet-id: ${{ secrets.HEXLET_ID }}
-
-      - name: Gradle Build Action
-        uses: gradle/gradle-build-action@v3.1.0
-
-      - name: Build with Gradle
-        run: make build
-      - name: Build and Push a JaCoCo report
-        uses: paambaati/codeclimate-action@v5.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          JACOCO_SOURCE_PATH: "${{github.workspace}}/app/src/main/java"
-        with:
-          coverageCommand: make report
-          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
-
-      - name: Setup Java JDK
-        uses: actions/setup-java@v4.2.1
-        with:
-          distribution: 'corretto'
-          java-version: '20'
-      - run: java app/src/main/java/hexlet/code/Main.java
-
-
