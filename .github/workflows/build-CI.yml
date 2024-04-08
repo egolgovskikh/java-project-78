@@ -20,7 +20,7 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v4.2.1
         with:
-          java-version: '20.0.2'
+          java-version: '20'
           distribution: 'corretto'
       - name: Build with Gradle
         run: make build
