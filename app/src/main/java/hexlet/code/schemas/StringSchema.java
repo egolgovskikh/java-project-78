@@ -24,19 +24,26 @@ public class StringSchema {
     }
 
     public boolean isValid(String s) {
+        return checkContains(s) && checkRequired(s) && checkMinLength(s);
+    }
+
+    private boolean checkRequired(String s) {
         if (required) {
-            if (s == null || s.isEmpty()) {
-                return false;
-            }
+            return s != null && !s.isEmpty();
         }
+        return true;
+    }
+
+    private boolean checkMinLength(String s) {
         if (s == null) {
             if (minLength != 0) {
                 return false;
             }
         }
-        if (s != null && s.length() < minLength) {
-            return false;
-        }
+        return s == null || s.length() >= minLength;
+    }
+
+    private boolean checkContains(String s) {
         if (s == null && !contains.isEmpty()) {
             return false;
         }
