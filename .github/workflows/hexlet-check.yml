@@ -26,9 +26,17 @@ jobs:
       - name: Gradle Build Action
         uses: gradle/gradle-build-action@v3.1.0
 
+      - name: Upload JaCoCo coverage report as a workflow artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
+
       - name: Setup Java JDK
         uses: actions/setup-java@v4.2.1
         with:
           distribution: 'corretto'
           java-version: '20'
       - run: java app/src/main/java/hexlet/code/Main.java
+
+
