@@ -55,7 +55,7 @@ public class MapSchemaTest {
         data.put("2", "second");
         data.put("3", "third");
         assertTrue(mapSchema.isValid(data));
-        assertTrue(mapSchema.isValid(null));
+        assertFalse(mapSchema.isValid(null));
         assertFalse(mapSchema.isValid(new HashMap<>()));
         data.remove("2");
         assertFalse(mapSchema.isValid(data));
