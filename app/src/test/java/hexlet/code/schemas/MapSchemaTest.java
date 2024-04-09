@@ -1,12 +1,15 @@
 package hexlet.code.schemas;
 
+import hexlet.code.states.map.RequiredState;
+import hexlet.code.states.map.SizeOfState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import static hexlet.code.schemas.StringSchemaTest.changeField;
+import static hexlet.code.TestUtil.changeField;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -14,26 +17,26 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MapSchemaTest {
 
-    private MapSchema mapSchema;
+    private MapSchema<String, String> mapSchema;
 
     @BeforeEach
     void setUp() {
-        mapSchema = new MapSchema();
+        mapSchema = new MapSchema<>();
     }
 
     @Test
     void testRequired() {
         mapSchema = mapSchema.required();
-        MapSchema expected = new MapSchema();
-        changeField(expected, "required", true);
+        MapSchema<String, String> expected = new MapSchema<>();
+        changeField(expected, List.of(new RequiredState<>()));
         assertEquals(expected, mapSchema);
     }
 
     @Test
     void testSizeOf() {
         mapSchema = mapSchema.sizeOf(3);
-        MapSchema expected = new MapSchema();
-        changeField(expected, "sizeOf", 3);
+        MapSchema<String, String> expected = new MapSchema<>();
+        changeField(expected, List.of(new SizeOfState<>(3)));
         assertEquals(expected, mapSchema);
     }
 
@@ -45,7 +48,7 @@ public class MapSchemaTest {
         data.put("2", "second");
         assertTrue(mapSchema.isValid(data));
         assertFalse(mapSchema.isValid(null));
-        assertFalse(mapSchema.isValid(new HashMap<String, String>()));
+        assertFalse(mapSchema.isValid(new HashMap<>()));
         data.remove("1");
         assertFalse(mapSchema.isValid(data));
     }
@@ -77,10 +80,8 @@ public class MapSchemaTest {
     @Test
     void testHashCode() {
         mapSchema = mapSchema.required();
-
-        MapSchema expectedSchema = new MapSchema();
-        changeField(expectedSchema, "required", true);
-
+        MapSchema<String, String> expectedSchema = new MapSchema<>();
+        changeField(expectedSchema, List.of(new RequiredState<>()));
         assertEquals(expectedSchema.hashCode(), mapSchema.hashCode());
     }
 
@@ -88,12 +89,12 @@ public class MapSchemaTest {
     void testEquals() {
         mapSchema = mapSchema.required();
 
-        MapSchema sameSchema = new MapSchema();
-        changeField(sameSchema, "required", true);
+        MapSchema<String, String> sameSchema = new MapSchema<>();
+        changeField(sameSchema, List.of(new RequiredState<>()));
 
         assertEquals(mapSchema, sameSchema);
 
-        MapSchema emptySchema = new MapSchema();
+        MapSchema<String, String> emptySchema = new MapSchema<>();
         assertNotEquals(mapSchema, emptySchema);
 
         Object object = new Object();

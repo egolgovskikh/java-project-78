@@ -1,12 +1,18 @@
 package hexlet.code.schemas;
 
+import hexlet.code.states.State;
+import lombok.EqualsAndHashCode;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@EqualsAndHashCode
 public class BaseSchema<T> {
 
-    protected boolean required = false;
+    List<State<T>> states = new ArrayList<>();
 
-    @SuppressWarnings("unchecked")
-    public T required() {
-        required = true;
-        return (T) this;
+    public boolean isValid(T obj) {
+        return states.stream().allMatch(s -> s.isValid(obj));
     }
+
 }

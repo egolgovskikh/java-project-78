@@ -1,14 +1,18 @@
 package hexlet.code.schemas;
 
+import hexlet.code.states.string.ContainsState;
+import hexlet.code.states.string.MinLengthState;
+import hexlet.code.states.string.RequiredState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static hexlet.code.TestUtil.changeField;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class StringSchemaTest {
@@ -23,30 +27,24 @@ class StringSchemaTest {
     @Test
     void testRequired() {
         stringSchema = stringSchema.required();
-
         StringSchema expected = new StringSchema();
-        changeField(expected, "required", true);
-
+        changeField(expected, List.of(new RequiredState()));
         assertEquals(expected, stringSchema);
     }
 
     @Test
     void testMinLength() {
         stringSchema = stringSchema.minLength(3);
-
         StringSchema expected = new StringSchema();
-        changeField(expected, "minLength", 3);
-
+        changeField(expected, List.of(new MinLengthState(3)));
         assertEquals(expected, stringSchema);
     }
 
     @Test
     void testContains() {
         stringSchema = stringSchema.contains("h");
-
         StringSchema expected = new StringSchema();
-        changeField(expected, "contains", "h");
-
+        changeField(expected, List.of(new ContainsState("h")));
         assertEquals(expected, stringSchema);
     }
 
@@ -95,10 +93,8 @@ class StringSchemaTest {
     @Test
     void testHashCode() {
         stringSchema = stringSchema.required();
-
         StringSchema expectedSchema = new StringSchema();
-        changeField(expectedSchema, "required", true);
-
+        changeField(expectedSchema, List.of(new RequiredState()));
         assertEquals(expectedSchema.hashCode(), stringSchema.hashCode());
     }
 
@@ -107,7 +103,7 @@ class StringSchemaTest {
         stringSchema = stringSchema.required();
 
         StringSchema sameSchema = new StringSchema();
-        changeField(sameSchema, "required", true);
+        changeField(sameSchema, List.of(new RequiredState()));
 
         assertEquals(stringSchema, sameSchema);
 
@@ -118,18 +114,4 @@ class StringSchemaTest {
         assertNotEquals(stringSchema, object);
     }
 
-    public static <T, V> void changeField(T object, String filedName, V newValue) {
-        Field field;
-        try {
-            try {
-                field = object.getClass().getDeclaredField(filedName);
-            } catch (NoSuchFieldException e) {
-                field = object.getClass().getSuperclass().getDeclaredField(filedName);
-            }
-            field.setAccessible(true);
-            field.set(object, newValue);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

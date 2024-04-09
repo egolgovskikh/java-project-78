@@ -1,9 +1,14 @@
 package hexlet.code.schemas;
 
+import hexlet.code.states.integer.PositiveState;
+import hexlet.code.states.integer.RangeState;
+import hexlet.code.states.integer.RequiredState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static hexlet.code.schemas.StringSchemaTest.changeField;
+import java.util.List;
+
+import static hexlet.code.TestUtil.changeField;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,7 +27,7 @@ class NumberSchemaTest {
     void testRequired() {
         numberSchema = numberSchema.required();
         NumberSchema expected = new NumberSchema();
-        changeField(expected, "required", true);
+        changeField(expected, List.of(new RequiredState()));
         assertEquals(expected, numberSchema);
     }
 
@@ -30,7 +35,7 @@ class NumberSchemaTest {
     void testPositive() {
         numberSchema = numberSchema.positive();
         NumberSchema expected = new NumberSchema();
-        changeField(expected, "positive", true);
+        changeField(expected, List.of(new PositiveState()));
         assertEquals(expected, numberSchema);
     }
 
@@ -38,8 +43,7 @@ class NumberSchemaTest {
     void testRange() {
         numberSchema = numberSchema.range(1, 10);
         NumberSchema expected = new NumberSchema();
-        changeField(expected, "min", 1);
-        changeField(expected, "max", 10);
+        changeField(expected, List.of(new RangeState(1, 10)));
         assertEquals(expected, numberSchema);
     }
 
@@ -87,7 +91,7 @@ class NumberSchemaTest {
         numberSchema = numberSchema.required();
 
         NumberSchema expectedSchema = new NumberSchema();
-        changeField(expectedSchema, "required", true);
+        changeField(expectedSchema, List.of(new RequiredState()));
 
         assertEquals(expectedSchema.hashCode(), numberSchema.hashCode());
     }
@@ -97,7 +101,7 @@ class NumberSchemaTest {
         numberSchema = numberSchema.required();
 
         NumberSchema sameSchema = new NumberSchema();
-        changeField(sameSchema, "required", true);
+        changeField(sameSchema, List.of(new RequiredState()));
 
         assertEquals(numberSchema, sameSchema);
 

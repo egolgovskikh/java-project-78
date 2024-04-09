@@ -1,66 +1,27 @@
 package hexlet.code.schemas;
 
-import java.util.Objects;
+import hexlet.code.states.string.ContainsState;
+import hexlet.code.states.string.MinLengthState;
+import hexlet.code.states.string.RequiredState;
+import lombok.EqualsAndHashCode;
 
-public class StringSchema extends BaseSchema<StringSchema> {
+@EqualsAndHashCode(callSuper = true)
+public class StringSchema extends BaseSchema<String> {
 
-    private int minLength = 0;
-    private String contains = "";
+    public StringSchema required() {
+        states.add(new RequiredState());
+        return this;
+    }
 
     public StringSchema minLength(int length) {
-        minLength = length;
+        states.removeIf(s -> s.getClass().equals(MinLengthState.class));
+        states.add(new MinLengthState(length));
         return this;
     }
 
     public StringSchema contains(String substring) {
-        contains = substring;
+        states.removeIf(s -> s.getClass().equals(ContainsState.class));
+        states.add(new ContainsState(substring));
         return this;
-    }
-
-    public boolean isValid(String s) {
-        return checkContains(s) && checkRequired(s) && checkMinLength(s);
-    }
-
-    private boolean checkRequired(String s) {
-        if (required) {
-            return s != null && !s.isEmpty();
-        }
-        return true;
-    }
-
-    private boolean checkMinLength(String s) {
-        if (s == null) {
-            if (minLength != 0) {
-                return false;
-            }
-        }
-        return s == null || s.length() >= minLength;
-    }
-
-    private boolean checkContains(String s) {
-        if (s == null && !contains.isEmpty()) {
-            return false;
-        }
-        if (s != null) {
-            return s.contains(contains);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-        StringSchema that = (StringSchema) object;
-        return required == that.required && minLength == that.minLength && Objects.equals(contains, that.contains);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(required, minLength, contains);
     }
 }
