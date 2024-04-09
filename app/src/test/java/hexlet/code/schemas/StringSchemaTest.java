@@ -27,6 +27,9 @@ class StringSchemaTest {
         assertFalse(stringSchema.isValid("hello"));
         assertFalse(stringSchema.isValid("good morning my friend"));
 
+        stringSchema = stringSchema.required().minLength(10).contains("he").minLength(4);
+        assertTrue(stringSchema.isValid("hello"));
+
         stringSchema = new StringSchema();
         assertTrue(stringSchema.isValid(null));
     }

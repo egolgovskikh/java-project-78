@@ -6,17 +6,17 @@ public class NumberSchema extends BaseSchema<Integer> {
 
     public NumberSchema required() {
 
-        states.add(Objects::nonNull);
+        states.put("required", Objects::nonNull);
         return this;
     }
 
     public NumberSchema positive() {
-        states.add(x -> x == null || x > 0);
+        states.put("positive", x -> x == null || x > 0);
         return this;
     }
 
     public NumberSchema range(int min, int max) {
-        states.add(x -> x == null || (x >= min && x <= max));
+        states.put("range", x -> x == null || (x >= min && x <= max));
         return this;
     }
 }
