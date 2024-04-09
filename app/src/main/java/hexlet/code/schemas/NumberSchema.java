@@ -1,26 +1,32 @@
 package hexlet.code.schemas;
 
-import hexlet.code.states.integer.PositiveState;
-import hexlet.code.states.integer.RangeState;
-import hexlet.code.states.integer.RequiredState;
-import lombok.EqualsAndHashCode;
+import java.util.Objects;
 
-@EqualsAndHashCode(callSuper = true)
 public class NumberSchema extends BaseSchema<Integer> {
 
     public NumberSchema required() {
-        states.add(new RequiredState());
+
+        states.add(Objects::nonNull);
         return this;
     }
 
     public NumberSchema positive() {
-        states.add(new PositiveState());
+        states.add(x -> {
+            if (x == null) {
+                return false;
+            }
+            return x > 0;
+        });
         return this;
     }
 
     public NumberSchema range(int minimum, int maximum) {
-        states.removeIf(s -> s.getClass().equals(RangeState.class));
-        states.add(new RangeState(minimum, maximum));
+        states.add(x -> {
+            if (x == null) {
+                return false;
+            }
+            return x > minimum && x < maximum;
+        });
         return this;
     }
 }

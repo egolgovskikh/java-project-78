@@ -1,19 +1,14 @@
 package hexlet.code.schemas;
 
-import hexlet.code.states.map.RequiredState;
-import hexlet.code.states.map.SizeOfState;
+
 import hexlet.code.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static hexlet.code.TestUtil.changeField;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MapSchemaTest {
@@ -23,22 +18,6 @@ public class MapSchemaTest {
     @BeforeEach
     void setUp() {
         mapSchema = new MapSchema<>();
-    }
-
-    @Test
-    void testRequired() {
-        mapSchema = mapSchema.required();
-        MapSchema<String> expected = new MapSchema<>();
-        changeField(expected, List.of(new RequiredState<>()));
-        assertEquals(expected, mapSchema);
-    }
-
-    @Test
-    void testSizeof() {
-        mapSchema = mapSchema.sizeof(3);
-        MapSchema<String> expected = new MapSchema<>();
-        changeField(expected, List.of(new SizeOfState<>(3)));
-        assertEquals(expected, mapSchema);
     }
 
     @Test
@@ -76,30 +55,6 @@ public class MapSchemaTest {
         assertFalse(mapSchema.isValid(new HashMap<>()));
         data.remove("2");
         assertFalse(mapSchema.isValid(data));
-    }
-
-    @Test
-    void testHashCode() {
-        mapSchema = mapSchema.required();
-        MapSchema<String> expectedSchema = new MapSchema<>();
-        changeField(expectedSchema, List.of(new RequiredState<>()));
-        assertEquals(expectedSchema.hashCode(), mapSchema.hashCode());
-    }
-
-    @Test
-    void testEquals() {
-        mapSchema = mapSchema.required();
-
-        MapSchema<String> sameSchema = new MapSchema<>();
-        changeField(sameSchema, List.of(new RequiredState<>()));
-
-        assertEquals(mapSchema, sameSchema);
-
-        MapSchema<String> emptySchema = new MapSchema<>();
-        assertNotEquals(mapSchema, emptySchema);
-
-        Object object = new Object();
-        assertNotEquals(mapSchema, object);
     }
 
     @Test
