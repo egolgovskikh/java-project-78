@@ -16,7 +16,7 @@ public class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema range(int min, int max) {
-        states.add(x -> x == null || (x > min && x < max));
+        states.add(x -> x == null || (x >= min && x <= max));
         return this;
     }
 }
