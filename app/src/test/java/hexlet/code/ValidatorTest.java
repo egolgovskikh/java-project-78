@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +13,7 @@ class ValidatorTest {
     private Validator validator;
 
     @BeforeEach
-    void beforeEach() {
+    void setUp() {
         validator = new Validator();
     }
 
@@ -27,6 +28,13 @@ class ValidatorTest {
     void number() {
         NumberSchema actual = validator.number();
         NumberSchema expected = new NumberSchema();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void map() {
+        MapSchema actual = validator.map();
+        MapSchema expected = new MapSchema();
         assertEquals(expected, actual);
     }
 }

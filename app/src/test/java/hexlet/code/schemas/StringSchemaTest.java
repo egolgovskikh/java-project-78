@@ -16,7 +16,7 @@ class StringSchemaTest {
     private StringSchema stringSchema;
 
     @BeforeEach
-    void beforeEach() {
+    void setUp() {
         stringSchema = new StringSchema();
     }
 
