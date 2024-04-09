@@ -16,13 +16,13 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
     }
 
     public MapSchema shape(Map<String, BaseSchema<String>> schemas) {
-        schemas.forEach(
-                (k, schema) -> states.put(
-                        "shape",
-                        x -> x.entrySet().stream().allMatch(
-                                kvEntry -> schema.isValid((String) x.get(kvEntry.getKey()))
-                        )
-                )
+        states.put(
+                "shape",
+                map -> schemas.entrySet().stream().allMatch(e -> {
+                    String v = (String) map.get(e.getKey());
+                    BaseSchema<String> schema = e.getValue();
+                    return schema.isValid(v);
+                })
         );
         return this;
     }
