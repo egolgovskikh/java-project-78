@@ -8,13 +8,12 @@ import java.util.Map;
 
 @AllArgsConstructor
 @EqualsAndHashCode
-public class SizeOfState implements State {
+public class SizeOfState<K, V> implements State<Map<K, V>> {
 
     private final int sizeOf;
 
     @Override
-    public boolean isValid(Object obj) {
-        Map<Object, Object> map = (Map<Object, Object>) obj;
+    public boolean isValid(Map<K, V> map) {
         if (map == null) {
             return false;
         }

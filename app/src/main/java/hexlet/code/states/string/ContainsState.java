@@ -6,13 +6,12 @@ import lombok.EqualsAndHashCode;
 
 @AllArgsConstructor
 @EqualsAndHashCode
-public class ContainsState implements State {
+public class ContainsState implements State<String> {
 
     private final String substring;
 
     @Override
-    public boolean isValid(Object obj) {
-        String str = (String) obj;
+    public boolean isValid(String str) {
         if (str == null) {
             return false;
         }

@@ -6,22 +6,22 @@ import hexlet.code.states.map.SizeOfState;
 
 import java.util.Map;
 
-public class MapSchema<K, V> extends BaseSchema {
+public class MapSchema<K, V> extends BaseSchema<Map<K, V>> {
 
     public MapSchema<K, V> required() {
-        states.add(new RequiredState());
+        states.add(new RequiredState<>());
         return this;
     }
 
     public MapSchema<K, V> sizeof(int size) {
         states.removeIf(s -> s.getClass().equals(SizeOfState.class));
-        states.add(new SizeOfState(size));
+        states.add(new SizeOfState<>(size));
         return this;
     }
 
-    public void shape(Map<K, BaseSchema> schemas) {
+    public void shape(Map<K, BaseSchema<V>> schemas) {
         schemas.forEach(
-                (k, schema) -> states.add(new ShapeState(schema))
+                (k, schema) -> states.add(new ShapeState<>(schema))
         );
     }
 }

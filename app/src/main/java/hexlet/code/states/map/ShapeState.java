@@ -7,13 +7,12 @@ import lombok.AllArgsConstructor;
 import java.util.Map;
 
 @AllArgsConstructor
-public class ShapeState implements State {
+public class ShapeState<K, V> implements State<Map<K, V>> {
 
-    private BaseSchema schema;
+    private BaseSchema<V> schema;
 
     @Override
-    public boolean isValid(Object obj) {
-        Map<Object, Object> map = (Map<Object, Object>) obj;
-        return map.entrySet().stream().allMatch(kvEntry -> schema.isValid(map.get(kvEntry.getKey())));
+    public boolean isValid(Map<K, V> obj) {
+        return obj.entrySet().stream().allMatch(kvEntry -> schema.isValid(obj.get(kvEntry.getKey())));
     }
 }

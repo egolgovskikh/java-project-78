@@ -29,7 +29,7 @@ public class MapSchemaTest {
     void testRequired() {
         mapSchema = mapSchema.required();
         MapSchema<String, String> expected = new MapSchema<>();
-        changeField(expected, List.of(new RequiredState()));
+        changeField(expected, List.of(new RequiredState<>()));
         assertEquals(expected, mapSchema);
     }
 
@@ -37,7 +37,7 @@ public class MapSchemaTest {
     void testSizeof() {
         mapSchema = mapSchema.sizeof(3);
         MapSchema<String, String> expected = new MapSchema<>();
-        changeField(expected, List.of(new SizeOfState(3)));
+        changeField(expected, List.of(new SizeOfState<>(3)));
         assertEquals(expected, mapSchema);
     }
 
@@ -82,7 +82,7 @@ public class MapSchemaTest {
     void testHashCode() {
         mapSchema = mapSchema.required();
         MapSchema<String, String> expectedSchema = new MapSchema<>();
-        changeField(expectedSchema, List.of(new RequiredState()));
+        changeField(expectedSchema, List.of(new RequiredState<>()));
         assertEquals(expectedSchema.hashCode(), mapSchema.hashCode());
     }
 
@@ -91,7 +91,7 @@ public class MapSchemaTest {
         mapSchema = mapSchema.required();
 
         MapSchema<String, String> sameSchema = new MapSchema<>();
-        changeField(sameSchema, List.of(new RequiredState()));
+        changeField(sameSchema, List.of(new RequiredState<>()));
 
         assertEquals(mapSchema, sameSchema);
 
@@ -108,7 +108,7 @@ public class MapSchemaTest {
 
         MapSchema<String, String> schema = v.map();
 
-        Map<String, BaseSchema> schemas = new HashMap<>();
+        Map<String, BaseSchema<String>> schemas = new HashMap<>();
 
         schemas.put("firstName", v.string().required());
         schemas.put("lastName", v.string().required().minLength(2));

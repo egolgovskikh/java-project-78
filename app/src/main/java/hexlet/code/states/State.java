@@ -1,7 +1,7 @@
 package hexlet.code.states;
 
-public interface State {
+public interface State<T> {
 
-    boolean isValid(Object obj);
+    boolean isValid(T obj);
 
 }
