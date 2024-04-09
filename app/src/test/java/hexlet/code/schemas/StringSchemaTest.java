@@ -1,5 +1,6 @@
 package hexlet.code.schemas;
 
+import hexlet.code.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,8 @@ class StringSchemaTest {
 
     @BeforeEach
     void setUp() {
-        stringSchema = new StringSchema();
+        Validator validator = new Validator();
+        stringSchema = validator.string();
     }
 
     @Test

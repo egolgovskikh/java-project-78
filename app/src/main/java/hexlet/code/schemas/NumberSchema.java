@@ -11,22 +11,12 @@ public class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema positive() {
-        states.add(x -> {
-            if (x == null) {
-                return false;
-            }
-            return x > 0;
-        });
+        states.add(x -> x == null || x > 0);
         return this;
     }
 
-    public NumberSchema range(int minimum, int maximum) {
-        states.add(x -> {
-            if (x == null) {
-                return false;
-            }
-            return x > minimum && x < maximum;
-        });
+    public NumberSchema range(int min, int max) {
+        states.add(x -> x == null || (x > min && x < max));
         return this;
     }
 }

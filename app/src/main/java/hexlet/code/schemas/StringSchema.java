@@ -8,22 +8,12 @@ public class StringSchema extends BaseSchema<String> {
     }
 
     public StringSchema minLength(int length) {
-        states.add(x -> {
-            if (x == null) {
-                return false;
-            }
-            return x.length() >= length;
-        });
+        states.add(x -> x == null || x.length() >= length);
         return this;
     }
 
     public StringSchema contains(String substring) {
-        states.add(x -> {
-            if (x == null) {
-                return false;
-            }
-            return x.contains(substring);
-        });
+        states.add(x -> x == null || x.contains(substring));
         return this;
     }
 }

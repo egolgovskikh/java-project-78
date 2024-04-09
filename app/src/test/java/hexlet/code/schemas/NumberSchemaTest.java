@@ -1,5 +1,6 @@
 package hexlet.code.schemas;
 
+import hexlet.code.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,8 @@ class NumberSchemaTest {
 
     @BeforeEach
     void setUp() {
-        numberSchema = new NumberSchema();
+        Validator validator = new Validator();
+        numberSchema = validator.number();
     }
 
     @Test

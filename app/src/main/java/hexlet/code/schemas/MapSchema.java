@@ -11,12 +11,7 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
     }
 
     public MapSchema sizeof(int size) {
-        states.add(x -> {
-            if (x == null) {
-                return false;
-            }
-            return x.size() == size;
-        });
+        states.add(x -> x == null || x.size() == size);
         return this;
     }
 
