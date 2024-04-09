@@ -25,9 +25,6 @@ class NumberSchemaTest {
         assertFalse(numberSchema.isValid(-1));
         assertFalse(numberSchema.isValid(10));
 
-//        numberSchema = numberSchema.required().positive().range(1, 9).range(10, 13);
-//        assertTrue(numberSchema.isValid(12));
-
         numberSchema = new NumberSchema();
         assertTrue(numberSchema.isValid(null));
     }

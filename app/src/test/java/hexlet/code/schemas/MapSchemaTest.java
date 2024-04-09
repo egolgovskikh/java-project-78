@@ -32,9 +32,6 @@ public class MapSchemaTest {
         assertFalse(mapSchema.isValid(new HashMap<>()));
         data.remove("1");
         assertFalse(mapSchema.isValid(data));
-
-//        mapSchema = mapSchema.required().sizeof(2).sizeof(1);
-//        assertTrue(mapSchema.isValid(data));
     }
 
     @Test
