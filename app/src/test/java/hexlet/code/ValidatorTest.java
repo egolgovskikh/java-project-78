@@ -33,8 +33,8 @@ class ValidatorTest {
 
     @Test
     void map() {
-        MapSchema actual = validator.map();
-        MapSchema expected = new MapSchema();
+        MapSchema<String, String> actual = validator.map();
+        MapSchema<String, String>  expected = new MapSchema<>();
         assertEquals(expected, actual);
     }
 }
