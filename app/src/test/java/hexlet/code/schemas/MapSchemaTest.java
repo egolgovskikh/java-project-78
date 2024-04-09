@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MapSchemaTest {
 
-    private MapSchema<String, String> mapSchema;
+    private MapSchema<String> mapSchema;
 
     @BeforeEach
     void setUp() {
@@ -28,7 +28,7 @@ public class MapSchemaTest {
     @Test
     void testRequired() {
         mapSchema = mapSchema.required();
-        MapSchema<String, String> expected = new MapSchema<>();
+        MapSchema<String> expected = new MapSchema<>();
         changeField(expected, List.of(new RequiredState<>()));
         assertEquals(expected, mapSchema);
     }
@@ -36,7 +36,7 @@ public class MapSchemaTest {
     @Test
     void testSizeof() {
         mapSchema = mapSchema.sizeof(3);
-        MapSchema<String, String> expected = new MapSchema<>();
+        MapSchema<String> expected = new MapSchema<>();
         changeField(expected, List.of(new SizeOfState<>(3)));
         assertEquals(expected, mapSchema);
     }
@@ -81,7 +81,7 @@ public class MapSchemaTest {
     @Test
     void testHashCode() {
         mapSchema = mapSchema.required();
-        MapSchema<String, String> expectedSchema = new MapSchema<>();
+        MapSchema<String> expectedSchema = new MapSchema<>();
         changeField(expectedSchema, List.of(new RequiredState<>()));
         assertEquals(expectedSchema.hashCode(), mapSchema.hashCode());
     }
@@ -90,12 +90,12 @@ public class MapSchemaTest {
     void testEquals() {
         mapSchema = mapSchema.required();
 
-        MapSchema<String, String> sameSchema = new MapSchema<>();
+        MapSchema<String> sameSchema = new MapSchema<>();
         changeField(sameSchema, List.of(new RequiredState<>()));
 
         assertEquals(mapSchema, sameSchema);
 
-        MapSchema<String, String> emptySchema = new MapSchema<>();
+        MapSchema<String> emptySchema = new MapSchema<>();
         assertNotEquals(mapSchema, emptySchema);
 
         Object object = new Object();
@@ -106,9 +106,9 @@ public class MapSchemaTest {
     void testShape() {
         var v = new Validator();
 
-        MapSchema<String, String> schema = v.map();
+        MapSchema<String> schema = v.map();
 
-        Map<String, BaseSchema<String>> schemas = new HashMap<>();
+        Map<String, BaseSchema> schemas = new HashMap<>();
 
         schemas.put("firstName", v.string().required());
         schemas.put("lastName", v.string().required().minLength(2));
