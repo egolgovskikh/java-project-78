@@ -46,18 +46,18 @@ class StringSchemaTest {
     void testIsValidOnlyMinLength() {
         stringSchema = stringSchema.minLength(3);
         assertTrue(stringSchema.isValid("hello"));
+        assertTrue(stringSchema.isValid(null));
         assertFalse(stringSchema.isValid("hi"));
         assertFalse(stringSchema.isValid(""));
-        assertFalse(stringSchema.isValid(null));
     }
 
     @Test
     void testIsValidOnlyContains() {
         stringSchema = stringSchema.contains("h");
         assertTrue(stringSchema.isValid("hello"));
+        assertTrue(stringSchema.isValid(null));
         assertFalse(stringSchema.isValid("good morning"));
         assertFalse(stringSchema.isValid(""));
-        assertFalse(stringSchema.isValid(null));
     }
 
 }

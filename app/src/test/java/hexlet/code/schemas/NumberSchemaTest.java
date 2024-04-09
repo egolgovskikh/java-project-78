@@ -43,16 +43,16 @@ class NumberSchemaTest {
     void testIsValidOnlyPositive() {
         numberSchema = numberSchema.positive();
         assertTrue(numberSchema.isValid(1));
+        assertTrue(numberSchema.isValid(null));
         assertFalse(numberSchema.isValid(0));
         assertFalse(numberSchema.isValid(-1));
-        assertFalse(numberSchema.isValid(null));
     }
 
     @Test
     void testIsValidOnlyRange() {
         numberSchema = numberSchema.range(1, 9);
         assertTrue(numberSchema.isValid(5));
+        assertTrue(numberSchema.isValid(null));
         assertFalse(numberSchema.isValid(0));
-        assertFalse(numberSchema.isValid(null));
     }
 }
