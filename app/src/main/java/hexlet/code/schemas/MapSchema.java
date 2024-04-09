@@ -3,14 +3,14 @@ package hexlet.code.schemas;
 import java.util.Map;
 import java.util.Objects;
 
-public class MapSchema<K> extends BaseSchema<Map<?, ?>> {
+public class MapSchema extends BaseSchema<Map<?, ?>> {
 
-    public MapSchema<K> required() {
+    public MapSchema required() {
         states.add(Objects::nonNull);
         return this;
     }
 
-    public MapSchema<K> sizeof(int size) {
+    public MapSchema sizeof(int size) {
         states.add(x -> {
             if (x == null) {
                 return false;
@@ -20,11 +20,14 @@ public class MapSchema<K> extends BaseSchema<Map<?, ?>> {
         return this;
     }
 
-    public void shape(Map<K, BaseSchema> schemas) {
+    public MapSchema shape(Map<String, BaseSchema<String>> schemas) {
         schemas.forEach(
                 (k, schema) -> states.add(
-                        x -> x.entrySet().stream().allMatch(kvEntry -> schema.isValid(x.get(kvEntry.getKey())))
+                        x -> x.entrySet().stream().allMatch(
+                                kvEntry -> schema.isValid((String) x.get(kvEntry.getKey()))
+                        )
                 )
         );
+        return this;
     }
 }

@@ -13,11 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MapSchemaTest {
 
-    private MapSchema<String> mapSchema;
+    private MapSchema mapSchema;
 
     @BeforeEach
     void setUp() {
-        mapSchema = new MapSchema<>();
+        mapSchema = new MapSchema();
     }
 
     @Test
@@ -61,9 +61,9 @@ public class MapSchemaTest {
     void testShape() {
         var v = new Validator();
 
-        MapSchema<String> schema = v.map();
+        MapSchema schema = v.map();
 
-        Map<String, BaseSchema> schemas = new HashMap<>();
+        Map<String, BaseSchema<String>> schemas = new HashMap<>();
 
         schemas.put("firstName", v.string().required());
         schemas.put("lastName", v.string().required().minLength(2));
