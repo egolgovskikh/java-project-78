@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class TestUtil {
-    public static <T, V> void changeField(T obj, List<State<V>> newStates) {
+    public static <T> void changeField(T obj, List<State> newStates) {
         Field states;
         try {
             states = obj.getClass().getSuperclass().getDeclaredField("states");

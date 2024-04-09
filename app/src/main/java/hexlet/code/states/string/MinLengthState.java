@@ -6,12 +6,13 @@ import lombok.EqualsAndHashCode;
 
 @AllArgsConstructor
 @EqualsAndHashCode
-public class MinLengthState implements State<String> {
+public class MinLengthState implements State {
 
     private final int minLength;
 
     @Override
-    public boolean isValid(String str) {
+    public boolean isValid(Object obj) {
+        String str = (String) obj;
         if (str == null) {
             return false;
         }

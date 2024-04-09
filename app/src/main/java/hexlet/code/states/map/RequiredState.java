@@ -6,10 +6,11 @@ import lombok.EqualsAndHashCode;
 import java.util.Map;
 
 @EqualsAndHashCode
-public class RequiredState<K, V> implements State<Map<K, V>> {
+public class RequiredState implements State {
 
     @Override
-    public boolean isValid(Map<K, V> map) {
+    public boolean isValid(Object obj) {
+        Map<Object, Object> map = (Map<Object, Object>) obj;
         return map != null;
     }
 }

@@ -6,13 +6,14 @@ import lombok.EqualsAndHashCode;
 
 @AllArgsConstructor
 @EqualsAndHashCode
-public class RangeState implements State<Integer> {
+public class RangeState implements State {
 
     private final int min;
     private final int max;
 
     @Override
-    public boolean isValid(Integer i) {
+    public boolean isValid(Object obj) {
+        Integer i = (Integer) obj;
         if (i == null) {
             return false;
         }

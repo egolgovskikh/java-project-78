@@ -4,9 +4,11 @@ import hexlet.code.states.State;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
-public class RequiredState implements State<Integer> {
+public class RequiredState implements State {
+
     @Override
-    public boolean isValid(Integer i) {
+    public boolean isValid(Object obj) {
+        Integer i = (Integer) obj;
         return i != null;
     }
 }

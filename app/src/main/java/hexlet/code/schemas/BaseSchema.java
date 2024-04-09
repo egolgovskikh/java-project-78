@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode
-public class BaseSchema<T> {
+public class BaseSchema {
 
-    List<State<T>> states = new ArrayList<>();
+    List<State> states = new ArrayList<>();
 
-    public boolean isValid(T obj) {
+    public boolean isValid(Object obj) {
         return states.stream().allMatch(s -> s.isValid(obj));
     }
 

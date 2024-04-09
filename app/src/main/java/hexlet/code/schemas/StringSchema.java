@@ -6,7 +6,7 @@ import hexlet.code.states.string.RequiredState;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
-public class StringSchema extends BaseSchema<String> {
+public class StringSchema extends BaseSchema {
 
     public StringSchema required() {
         states.add(new RequiredState());

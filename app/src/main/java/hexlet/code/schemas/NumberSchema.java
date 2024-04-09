@@ -6,7 +6,7 @@ import hexlet.code.states.integer.RequiredState;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
-public class NumberSchema extends BaseSchema<Integer> {
+public class NumberSchema extends BaseSchema {
 
     public NumberSchema required() {
         states.add(new RequiredState());
