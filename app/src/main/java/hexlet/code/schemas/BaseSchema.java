@@ -6,8 +6,13 @@ import java.util.function.Predicate;
 
 public class BaseSchema<T> {
 
-    Map<String, Predicate<T>> states = new HashMap<>();
+    protected Map<String, Predicate<T>> states = new HashMap<>();
 
+    /**
+     *
+     * @param obj the checked object
+     * @return the result of checking
+     */
     public boolean isValid(T obj) {
         return states.entrySet().stream().allMatch(s -> s.getValue().test(obj));
     }

@@ -11,7 +11,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MapSchemaTest {
+public final class MapSchemaTest {
 
     private MapSchema mapSchema;
 
@@ -23,7 +23,7 @@ public class MapSchemaTest {
 
     @Test
     void testIsValid() {
-        mapSchema = mapSchema.required().sizeof(2);
+        mapSchema.required().sizeof(2);
         Map<String, String> data = new HashMap<>();
         data.put("1", "first");
         data.put("2", "second");
@@ -33,13 +33,13 @@ public class MapSchemaTest {
         data.remove("1");
         assertFalse(mapSchema.isValid(data));
 
-        mapSchema = mapSchema.required().sizeof(2).sizeof(1);
+        mapSchema.required().sizeof(2).sizeof(1);
         assertTrue(mapSchema.isValid(data));
     }
 
     @Test
     void testIsValidOnlyRequired() {
-        mapSchema = mapSchema.required();
+        mapSchema.required();
         Map<String, String> data = new HashMap<>();
         data.put("3", "third");
         assertTrue(mapSchema.isValid(data));
@@ -49,7 +49,7 @@ public class MapSchemaTest {
 
     @Test
     void testIsValidOnlySizeOf() {
-        mapSchema = mapSchema.sizeof(3);
+        mapSchema.sizeof(3);
         Map<String, String> data = new HashMap<>();
         data.put("1", "first");
         data.put("2", "second");
