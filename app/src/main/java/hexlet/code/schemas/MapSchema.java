@@ -13,7 +13,7 @@ public class MapSchema<K, V> extends BaseSchema<Map<K, V>> {
         return this;
     }
 
-    public MapSchema<K, V> sizeOf(int size) {
+    public MapSchema<K, V> sizeof(int size) {
         states.removeIf(s -> s.getClass().equals(SizeOfState.class));
         states.add(new SizeOfState<>(size));
         return this;

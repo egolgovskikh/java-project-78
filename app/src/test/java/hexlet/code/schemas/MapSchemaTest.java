@@ -34,8 +34,8 @@ public class MapSchemaTest {
     }
 
     @Test
-    void testSizeOf() {
-        mapSchema = mapSchema.sizeOf(3);
+    void testSizeof() {
+        mapSchema = mapSchema.sizeof(3);
         MapSchema<String, String> expected = new MapSchema<>();
         changeField(expected, List.of(new SizeOfState<>(3)));
         assertEquals(expected, mapSchema);
@@ -43,7 +43,7 @@ public class MapSchemaTest {
 
     @Test
     void testIsValid() {
-        mapSchema = mapSchema.required().sizeOf(2);
+        mapSchema = mapSchema.required().sizeof(2);
         Map<String, String> data = new HashMap<>();
         data.put("1", "first");
         data.put("2", "second");
@@ -66,7 +66,7 @@ public class MapSchemaTest {
 
     @Test
     void testIsValidOnlySizeOf() {
-        mapSchema = mapSchema.sizeOf(3);
+        mapSchema = mapSchema.sizeof(3);
         Map<String, String> data = new HashMap<>();
         data.put("1", "first");
         data.put("2", "second");
